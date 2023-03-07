@@ -85,6 +85,8 @@ The OneDriveClient library for CODESYS needs onedrive-uploader to be available o
 
 ### Configure using embedded external files
 
+OneDriveClient needs to know where it can find the onedrive-uploader binary and configuration file. Embed both files in your CODESYS project and define the OneDriveClient configuration struct to let OneDriveClient know to find it.
+
 ```
 VAR
 	sAppPath : STRING(80) := '';
@@ -104,6 +106,8 @@ OneDriveClient.ChangeMode(stConfig := stConfig);
 
 ### List remote directory
 
+List remote directory `/`.
+
 ```
 VAR
 	stConfig		: OneDriveClient.ONEDRIVE_CONFIG;
@@ -122,6 +126,8 @@ OneDriveClient.OneDriveList(
 
 ### Create remote directory
 
+Create remote directory `/onedrive-test`.
+
 ```
 VAR
 	stConfig		: OneDriveClient.ONEDRIVE_CONFIG;
@@ -135,6 +141,8 @@ OneDriveClient.OneDriveMakeDir(
 ```
 
 ### Upload local file to remote directory
+
+Upload local file `/home/root/closetoyou.wav` to remote directory `/onedrive-test`.
 
 ```
 VAR
@@ -152,6 +160,8 @@ OneDriveClient.OneDriveUpload(
 
 ### Get info of remote file or directory
 
+Get info of remote file `/onedrive-test/closetoyou.wav`.
+
 ```
 VAR
 	stConfig	: OneDriveClient.ONEDRIVE_CONFIG;
@@ -167,6 +177,8 @@ OneDriveClient.OneDriveInfo(
 ```
 
 ### Download remote file to local directory
+
+Download the remote file `/onedrive-test/closetoyou.wav` to the local directory `/tmp`.
 
 ```
 VAR
@@ -184,10 +196,12 @@ OneDriveClient.OneDriveDownload(
 
 ### Remove remote file or directory
 
+Remove the remote directory `/onedrive-test`.
+
 ```
 VAR
 	stConfig	: OneDriveClient.ONEDRIVE_CONFIG;
-	sRemotePath	: STRING(400) := '/onedrive-test/';
+	sRemotePath	: STRING(400) := '/onedrive-test';
 END_VAR
 
 OneDriveClient.OneDriveRemove(
@@ -196,7 +210,7 @@ OneDriveClient.OneDriveRemove(
 );
 ```
 
-## UTF-8 encoding and WSTRING
+### UTF-8 encoding and WSTRING
 
 CODESYS does not have proper support for UTF-8 encoded characters in STRING types prior to CODESYS 3.5 SP18. If available, enabling this option should support UTF-8 encoded paths with STRING (untested). Otherwise use WSTRING and interact with the library through the helper functions `NameToWstring` and `PathFromWstring`.
 
